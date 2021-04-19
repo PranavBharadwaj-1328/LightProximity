@@ -14,7 +14,7 @@ import android.view.Menu;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
-    private SensorManager sensorManager;
+    SensorManager sensorManager;
     TextView proxval;
     TextView lightval;
     String pval,lval;
@@ -33,17 +33,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
 
-        if(sensorEvent.sensor.getType() == Sensor.TYPE_LIGHT)
-        {
-            float l = (float) sensorEvent.values[0];
-            lval = "<b> "+l+" </b>";
-            proxval.setText(Html.fromHtml(lval));
-        }
         if(sensorEvent.sensor.getType() == Sensor.TYPE_PROXIMITY)
         {
             float p = sensorEvent.values[0];
             pval = "<b> "+p+" </b>";
             proxval.setText(Html.fromHtml(pval));
+        }
+        if(sensorEvent.sensor.getType() == Sensor.TYPE_LIGHT) {
+            float l = sensorEvent.values[0];
+            lval = "<b> " + l + " </b>";
+            lightval.setText(Html.fromHtml(lval));
         }
     }
 
